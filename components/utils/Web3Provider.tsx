@@ -15,7 +15,7 @@ import MyCustomAvatar from "./MyCustomAvatar";
 // )
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-	[hardhat,bsc,bscTestnet,localhost,mainnet],
+	[bsc,hardhat,bscTestnet,localhost,mainnet],
 	[publicProvider()],
   )
 const config = createConfig(

@@ -2,6 +2,7 @@ import { erc20ABI } from "wagmi";
 
 export interface ChainAddress {
   31337:string;
+  56:string;
 }
 export interface Contract {
   address: ChainAddress;
@@ -10,6 +11,7 @@ export interface Contract {
 export const tcpTokenUpgradeableConfig:Contract = {
   address: {
     31337: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+    56: "0xa9d2c420247ae4fe7b694be75d5db10b20fe3ea8",
   },
   abi: [
     {
@@ -504,6 +506,7 @@ export const tcpTokenUpgradeableConfig:Contract = {
 export const tcpPositionUpgradeableConfig:Contract = {
   address: {
     31337: "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+    56: "0x52462a9BFfe255353bdc627748b00d773e41C3Cc",
   },
   abi: [
     {
@@ -1566,6 +1569,7 @@ export const tcpPositionUpgradeableConfig:Contract = {
 export const c2cMarketUpgradeableConfig:Contract = {
   address: {
     31337: "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+    56: "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
   },
   abi: [
     {
@@ -2873,13 +2877,14 @@ export const wagmigotchiContractConfig = {
 } as const;
 
 export const usdcContractConfig = {
-  address: "0x9A676e781A523b5d0C0e43731313A708CB607508",
+  address: "0x55d398326f99059ff775485246999027b3197955",
   abi: erc20ABI,
 } as const;
 
 export const newVersionUpgradeableConfig:Contract = {
   address: {
     31337: "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
+    56: "0x4Be8e9d908B4E6D2038d729DCF479A1e3e44f86b",
   },
   abi: [
     {
@@ -3156,6 +3161,7 @@ export const newVersionUpgradeableConfig:Contract = {
 export const oldTcpPositionUpgradeableConfig:Contract = {
   address: {
     31337: "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+    56: "0x77d34de33a75ac2a772f8c47080c0232cbff463b",
   },
   abi: [
     {
@@ -4218,6 +4224,7 @@ export const oldTcpPositionUpgradeableConfig:Contract = {
 export const oldTcpTokenUpgradeableConfig:Contract = {
   address: {
     31337: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+    56: "0xc26a2bb245e0bced2c2a2671391507fae3630846",
   },
   abi: [
     {

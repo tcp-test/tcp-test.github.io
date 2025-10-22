@@ -26,7 +26,7 @@ export default function DefaultLayout({
       easing: 'ease-out-sine',
     })
   })
-  const subgraphUri = "http://localhost:8000/subgraphs/name/scaffold-eth/your-contract";
+  const subgraphUri = "https://api.thegraph.com/subgraphs/name/tcpglobalc/c2c-market";
 
   const client = new ApolloClient({
     uri: subgraphUri,
