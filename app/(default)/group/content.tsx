@@ -1,3 +1,4 @@
+"use client"; // ❗ 必须加
 export default function AboutContent() {  
   return (
     <section>

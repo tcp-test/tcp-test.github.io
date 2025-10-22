@@ -1,3 +1,4 @@
+
 import Image from 'next/image'
 import HeroImage from '@/public/images/about-hero.jpg'
 import TeamImage from '@/public/images/team.svg'

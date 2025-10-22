@@ -1,3 +1,4 @@
+'use client'
 export const metadata = {
   title: '我的团队',
   description: 'Page description',

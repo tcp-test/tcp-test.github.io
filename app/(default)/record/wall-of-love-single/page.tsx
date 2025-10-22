@@ -1,3 +1,4 @@
+'use client'
 export const metadata = {
   title: 'Wall of Love (Single Post) - Tidy',
   description: 'Page description',

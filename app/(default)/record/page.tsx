@@ -1,3 +1,4 @@
+"use client"; // ❗ 必须加
 export const metadata = {
   title: '交易记录',
   description: 'Page description',

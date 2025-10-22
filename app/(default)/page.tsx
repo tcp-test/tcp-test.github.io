@@ -1,3 +1,4 @@
+"use client";
 export const metadata = {
   title: '主页',
   description: 'Page description',
@@ -9,8 +10,8 @@ import Features from '@/components/features-pricing'
 import FeaturesTable from '@/components/features-table'
 import Faqs from '@/components/faqs'
 import Cta from '@/components/cta-dark'
-
-export default function Home() {
+import dynamic from 'next/dynamic';
+function Home() {
   return (
     <>
       <Hero />
@@ -22,3 +23,4 @@ export default function Home() {
     </>
   )
 }
+export default dynamic(() => Promise.resolve(Home), { ssr: false });

@@ -4,13 +4,18 @@ import toast from "react-hot-toast"
 import { useAccount } from "wagmi";
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Stats02() {  
   const { address, isConnecting, isDisconnected } = useAccount();
 
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    setUrl(window.location.origin + "?address=" + address);
+  }, [address]);
   
-  
-  const url = location.origin+"?address="+address;
+
   return (
     <section className="-translate-y-1/3">
 

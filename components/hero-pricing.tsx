@@ -1,3 +1,5 @@
+"use client";
+
 import PricingTables from './pricing-tables';
 
 export default function HeroPricing() {  

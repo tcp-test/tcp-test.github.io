@@ -1,3 +1,4 @@
+'use client'
 export const metadata = {
   title: '交易',
   description: 'Page description',

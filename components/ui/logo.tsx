@@ -1,3 +1,4 @@
+"use client"; // ❗ 必须加
 import Link from 'next/link'
 
 export default function Logo() {

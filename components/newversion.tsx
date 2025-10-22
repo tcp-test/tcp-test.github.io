@@ -1,4 +1,5 @@
 // @ts-nocheck
+"use client"; // ❗ 必须加
 import Animation from '@/components/ui/animation'
 import { useAccount, useBalance, useChainId, useContractRead,useContractReads, useContractWrite, useToken, useWaitForTransaction } from 'wagmi'
 import { newVersionUpgradeableConfig,oldTcpPositionUpgradeableConfig,oldTcpTokenUpgradeableConfig,tcpPositionUpgradeableConfig,tcpTokenUpgradeableConfig } from './types/contracts';

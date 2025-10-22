@@ -1,3 +1,4 @@
+"use client"; // ❗ 必须加
 import Link from 'next/link'
 import Image from 'next/image'
 import PageHero from '@/public/images/wof-single-hero.jpg'

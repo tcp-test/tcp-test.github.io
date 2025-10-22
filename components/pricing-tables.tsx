@@ -1,5 +1,5 @@
 // @ts-nocheck
-'use client'
+"use client";
 
 import { useState } from 'react'
 import { TcpTokenUpgradeable__factory } from './types/factories/contracts';
@@ -26,6 +26,7 @@ export default function PricingTables() {
   const [harvestAmount,setHarvestAmount] = useState<number>(0);
 
   const [harverstLoading,setHarverstLoading] = useState(false);
+  const [harverstUnlockLoading,setHarverstUnlockLoading] = useState(false);
   const [relockLoading,setRelockLoading] = useState(false);
   // const { data, isRefetching, isSuccess, refetch } = useContractRead({
   //   address: address,
@@ -39,24 +40,25 @@ export default function PricingTables() {
         address:tcpPositionUpgradeableConfig.address[chainId],
         abi:tcpPositionUpgradeableConfig.abi,
         functionName: 'getUnlockAmount',
-        args:[address]
+        args:[address ? address : "0x0000000000000000000000000000000000000000"]
       },
       {
         address:tcpPositionUpgradeableConfig.address[chainId],
         abi:tcpPositionUpgradeableConfig.abi,
         functionName: 'getWaitHarvest',
-        args:[address]
+        args:[address ? address : "0x0000000000000000000000000000000000000000"]
       },
       {
         address:tcpPositionUpgradeableConfig.address[chainId],
         abi:tcpPositionUpgradeableConfig.abi,
         functionName: 'getUserInfo',
-        args:[address]
+        args:[address ? address : "0x0000000000000000000000000000000000000000"]
       },
     ],
     watch:true,
     onSuccess:(data)=>{
-      console.log("useContractReads",data)
+      console.log("chainId",chainId)
+      console.log("useContractReads3",data)
       setLockAmount(Number(formatEther(data[2].result[2])).toFixed(1));
       setUnlockAmount(Number(formatEther(data[0].result)).toFixed(1));
       setWaitHarvest(Number(formatEther(data[1].result)).toFixed(1));
@@ -83,12 +85,32 @@ export default function PricingTables() {
     },
   })
 
+  const positionHarverstUnlockWrite = useContractWrite({
+    address:tcpPositionUpgradeableConfig.address[chainId],
+    abi:tcpPositionUpgradeableConfig.abi,
+    functionName: 'harvestUnlockAmount',
+    onError(error) {
+      setHarverstUnlockLoading(false)
+      toast.error(error.details);
+    },
+  })
+
   useWaitForTransaction({
     hash: positionHarverstWrite.data?.hash,
     onSuccess(data) {
       if(data.blockNumber){
         toast.success("领取成功");
         setHarverstLoading(false);
+      }
+    }
+  })
+
+  useWaitForTransaction({
+    hash: positionHarverstUnlockWrite.data?.hash,
+    onSuccess(data) {
+      if(data.blockNumber){
+        toast.success("领取成功");
+        setHarverstUnlockLoading(false);
       }
     }
   })
@@ -126,14 +148,32 @@ export default function PricingTables() {
             </div>
             <div className='w-1/2 text-right'>
               <div className="text-lg font-semibold text-slate-800 mb-1 w-full">已释放</div>
-              <div className=" items-baseline mb-3  w-full  space-x-1">
+              <div className=" items-baseline   w-full  space-x-1">
                 <span className="h2 leading-7 font-playfair-display text-slate-800">{unlockAmount}</span>
                 <span className=" text-slate-400  font-bold">TCP</span>
               </div>
-              
+              <div className="rounded  w-full flex">
+                <Button isLoading={harverstUnlockLoading} disabled={harverstUnlockLoading}  onClick={
+                    () =>{
+                      setHarverstUnlockLoading(true);
+                      
+                      positionHarverstUnlockWrite.write({
+                        value: parseEther('0.003')
+                      });
+                    }
+                  }>领取</Button>
+              </div>
             </div>
           </div>
- 
+          <div className="mb-4 pb-4 flex flex-row space-x-3">
+            <div className='w-1/2 border-r-3 border-slate-200 text-left'>
+              <div className="text-lg font-semibold text-slate-800 mb-1 w-full">TCP余额</div>
+              <div className=" items-baseline mb-3  w-full  space-x-1">
+                <span className="h2 leading-7 font-playfair-display text-slate-800">{lockAmount}</span>
+                <span className=" text-slate-400 font-bold">TCP</span>
+              </div>
+            </div>
+          </div>
 
         </div>
         {/* Pricing table 2 */}

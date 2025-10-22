@@ -1,4 +1,5 @@
 
+"use client"
 import Web3Provider from '@/components/utils/Web3Provider'
 import './css/style.css'
 
