@@ -8,7 +8,7 @@ import { useContractInfo } from './utils/useContractInfo';
 import { formatEther,parseEther } from 'ethers';
 import PositionAdd from './position-add';
 import Modal from './utils/modal';
-import { tcpPositionUpgradeableConfig } from './types/contracts'
+import { tcpPositionUpgradeableConfig,tcpTokenUpgradeableConfig } from './types/contracts'
 import { da } from 'date-fns/locale';
 import Button from './utils/Button';
 import toast from 'react-hot-toast';
@@ -21,6 +21,7 @@ export default function PricingTables() {
   const { address, isConnecting, isDisconnected } = useAccount();
 
   const [lockAmount,setLockAmount] = useState<number>(0);
+  const [balance,setBalance] = useState<number>(0);
   const [unlockAmount,setUnlockAmount] = useState<number>(0);
   const [waitHarvest,setWaitHarvest] = useState<number>(0);
   const [harvestAmount,setHarvestAmount] = useState<number>(0);
@@ -54,6 +55,12 @@ export default function PricingTables() {
         functionName: 'getUserInfo',
         args:[address ? address : "0x0000000000000000000000000000000000000000"]
       },
+      {
+        address:tcpTokenUpgradeableConfig.address[chainId],
+        abi:tcpTokenUpgradeableConfig.abi,
+        functionName: 'balanceOf',
+        args:[address ? address : "0x0000000000000000000000000000000000000000"]
+      }
     ],
     watch:true,
     onSuccess:(data)=>{
@@ -63,6 +70,7 @@ export default function PricingTables() {
       setUnlockAmount(Number(formatEther(data[0].result)).toFixed(1));
       setWaitHarvest(Number(formatEther(data[1].result)).toFixed(1));
       setHarvestAmount(Number(formatEther(data[2].result[3])).toFixed(1));
+      setBalance(Number(formatEther(data[3].result)).toFixed(1))
     }
   });
 
@@ -169,7 +177,7 @@ export default function PricingTables() {
             <div className='w-1/2 border-r-3 border-slate-200 text-left'>
               <div className="text-lg font-semibold text-slate-800 mb-1 w-full">TCP余额</div>
               <div className=" items-baseline mb-3  w-full  space-x-1">
-                <span className="h2 leading-7 font-playfair-display text-slate-800">{lockAmount}</span>
+                <span className="h2 leading-7 font-playfair-display text-slate-800">{balance}</span>
                 <span className=" text-slate-400 font-bold">TCP</span>
               </div>
             </div>
